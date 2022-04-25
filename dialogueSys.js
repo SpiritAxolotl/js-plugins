@@ -1,6 +1,6 @@
 /*
 
-A JavaScript plugin that adds a div based rpg style dialogue system. Which includes animation, audio, images and function call logic.
+A JavaScript plugin that adds a div based RPG style dialogue system. Which includes animation, audio, images and function call logic.
 Originally made for SpiritAxolotl's birthday.
 
 Version : 1f
