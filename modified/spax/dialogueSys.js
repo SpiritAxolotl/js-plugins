@@ -25,7 +25,8 @@ class dialogueSys
         this.imgSrc = imgSrc;
         this.audioSrc = audioSrc;
         
-        this.diaBoxLine = dialogueBox.querySelector("div");
+        this.diaBox.innerHTML = "<div></div";
+        this.diaBoxLine = diaBox.querySelector("div");
         this.diaBox.setAttribute("data-disabled", "true");
     }
     
