@@ -84,11 +84,6 @@ class dialogueSys
             {
                 var imageVar = "";
                 
-                if (!spaxFixed)
-                {
-                    imageVar = ` class="spaxDayECtext-boximg spaxDayEA"`;
-                }
-                
                 this.diaBoxLine.innerHTML = `<img${imageVar} src="${this.imgSrc}/${person}/${face}.png"><span></span>`;
                 
                 this.textBox = this.diaBoxLine.querySelector("span");
