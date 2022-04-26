@@ -11,7 +11,7 @@ By CalmBubbles :)
 
 class dialogueSys
 {
-    constructor (dialogueBox, blockedText, characters, animIn, animInTime, animOut, animOutTime, whenTypingFunc, notTypingFunc, imgSrc, audioSrc)
+    constructor (dialogueBox, blockedText, characters, animIn, animInTime, animOut, animOutTime, imgSrc, audioSrc)
     {
         this.diaBox = dialogueBox;
         this.blockedChars = blockedText;
@@ -20,34 +20,41 @@ class dialogueSys
         this.animInTime = animInTime;
         this.animOut = animOut;
         this.animOutTime = animOutTime;
-        this.whenTypingFunc = whenTypingFunc;
-        this.notTypingFunc = notTypingFunc;
         this.imgSrc = imgSrc;
         this.audioSrc = audioSrc;
+        this.audioVol = 0.75;
         
         var newDBL = document.createElement("div");
         this.diaBox.appendChild(newDBL);
         
-        this.diaBoxLine = diaBox.querySelector("div");
+        this.diaBoxLine = this.diaBox.querySelector("div");
         this.diaBox.setAttribute("data-disabled", "true");
+        
+        this.whenTypingFunc = function () { };
+        this.notTypingFunc = function () { };
     }
     
     SetActive (state, funcAfter)
     {
+        var animInTime = this.animInTime;
+        var animOutTime = this.animOutTime;
+        
         this.SpecialBox = null;
+        
+        if (funcAfter == null) funcAfter = function () { };
         
         if (state == true)
         {
-            this.diaBox.style.animation = `${this.animIn} ${this.animInTime}`;
+            this.diaBox.style.animation = `${this.animIn} ${animInTime}s`;
             
-            setTimeout(function () {
+            setTimeout(() => {
                 this.diaBox.setAttribute("data-disabled", "false");
                 this.diaBox.style.animation = "none";
                 
                 this.diaIsActive = true;
                 
                 funcAfter();
-            }, 125);
+            }, animInTime * 1000);
         }
         else
         {
@@ -55,13 +62,13 @@ class dialogueSys
             
             this.diaBoxLine.innerHTML = "";
             
-            this.diaBox.style.animation = `${this.animOut} ${this.animOutTime}`;
+            this.diaBox.style.animation = `${this.animOut} ${animOutTime}s`;
             
-            setTimeout(function () {
+            setTimeout(() => {
                 this.diaBox.setAttribute("data-disabled", "true");
                 this.diaBox.style.animation = "none";
                 funcAfter();
-            }, 125);
+            }, animOutTime * 1000);
         }
     }
     
@@ -70,6 +77,7 @@ class dialogueSys
         if (!this.diaIsActive) return;
         
         var index = 0;
+        var interval;
         var sndSrc;
         var validPeep = false;
         
@@ -85,9 +93,7 @@ class dialogueSys
         {
             if (validPeep)
             {
-                var imageVar = "";
-                
-                this.diaBoxLine.innerHTML = `<img${imageVar} src="${this.imgSrc}/${person}/${face}.png"><span></span>`;
+                this.diaBoxLine.innerHTML = `<img src="${this.imgSrc}/${person}/${face}.png"><span></span>`;
                 
                 this.textBox = this.diaBoxLine.querySelector("span");
                 
@@ -120,9 +126,9 @@ class dialogueSys
         
         this.whenTypingFunc();
         
-        var interval = setInterval(function () {
+        interval = setInterval(() => {
             var textSnd = new Audio(sndSrc);
-            textSnd.volume = 0.75;
+            textSnd.volume = this.audioVol;
             var shouldPlaySnd = false;
             
             if (index < text.length)
@@ -147,9 +153,9 @@ class dialogueSys
             
             if (index == text.length)
             {
+                clearInterval(interval);
                 this.notTypingFunc();
                 funcAfter();
-                clearInterval(interval);
             }
         }, (24 / speed));
     }
