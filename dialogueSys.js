@@ -3,7 +3,7 @@
 A JavaScript plugin that adds a div based RPG style dialogue system. Which includes animation, audio, images and function call logic.
 Originally made for SpiritAxolotl's birthday.
 
-Version : 1.3.16a
+Version : 1.3.17a
 
 By CalmBubbles :)
 
@@ -40,7 +40,7 @@ class dialogueSys
     
     SetActive (state, funcAfter)
     {
-        if (!this.readyForNextCall) return this.SetActive(state, funcAfter);
+        if (!this.readyForNextCall) return requestAnimationFrame(() => { this.SetActive(state, funcAfter); });
         
         this.readyForNextCall = false;
         
@@ -90,7 +90,7 @@ class dialogueSys
     {
         if (!this.diaIsActive) return;
         
-        if (!this.readyForNextCall) return this.typeOnBox(text, speed, person, face, funcAfter);
+        if (!this.readyForNextCall) return requestAnimationFrame(() => { this.typeOnBox(text, speed, person, face, funcAfter); });
         
         this.readyForNextCall = false;
         
@@ -188,7 +188,7 @@ class dialogueSys
     
     lineBreakBox (amount)
     {
-        if (!this.readyForNextCall) return lineBreakBox(amount);
+        if (!this.readyForNextCall) return requestAnimationFrame(() => { lineBreakBox(amount); });
         
         this.readyForNextCall = false;
         
@@ -202,7 +202,7 @@ class dialogueSys
     
     resetBoxTo (text)
     {
-        if (!this.readyForNextCall) return resetBoxTo(text);
+        if (!this.readyForNextCall) return requestAnimationFrame(() => { resetBoxTo(text); });
         
         this.readyForNextCall = false;
         
@@ -222,7 +222,7 @@ class dialogueSys
     
     clearBox ()
     {
-        if (!this.readyForNextCall) return clearBox();
+        if (!this.readyForNextCall) return requestAnimationFrame(() => { clearBox(); });
         
         this.readyForNextCall = false;
         
