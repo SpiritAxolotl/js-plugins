@@ -3,7 +3,7 @@
 A JavaScript plugin that adds a div based RPG style dialogue system. Which includes animation, audio, images and function call logic.
 Originally made for SpiritAxolotl's birthday.
 
-Version : 1.38a
+Version : 1.3.9a
 
 By CalmBubbles :)
 
@@ -139,7 +139,7 @@ class dialogueSys
             textSnd.volume = this.audioVol;
             var shouldPlaySnd = false;
             
-            if (this.charIndex < text.length + this.charIndex)
+            if (this.charIndex + 1 < text.length + this.charIndex)
             {
                 let currentChar = document.querySelector(`#dialogueSysChar_${this.charIndex}`);
                 
@@ -157,7 +157,7 @@ class dialogueSys
             else if (this.charIndex == text.length + this.charIndex)
             {
                 clearInterval(interval);
-                this.notTypingFunc();
+                this.notTypingFunc();console.log("e");
                 funcAfter();
             }
         }, (24 / speed));
