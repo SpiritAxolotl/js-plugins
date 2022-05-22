@@ -79,7 +79,7 @@ class dialogueSys
     {
         if (!this.diaIsActive) return;
         
-        var modifiedText;
+        var modifiedText = "";
         var validPeep = false;
         var interval;
         var sndSrc;
@@ -174,7 +174,7 @@ class dialogueSys
     
     resetBoxTo (text)
     {
-        var modifiedText;
+        var modifiedText = "";
         
         for (let i = 0; i < text.length; i++)
         {
