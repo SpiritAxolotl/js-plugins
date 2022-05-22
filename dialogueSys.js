@@ -3,7 +3,7 @@
 A JavaScript plugin that adds a div based RPG style dialogue system. Which includes animation, audio, images and function call logic.
 Originally made for SpiritAxolotl's birthday.
 
-Version : 1.3.14a
+Version : 1.3.16a
 
 By CalmBubbles :)
 
@@ -34,10 +34,16 @@ class dialogueSys
         
         this.whenTypingFunc = function () { };
         this.notTypingFunc = function () { };
+        
+        this.readyForNextCall = true;
     }
     
     SetActive (state, funcAfter)
     {
+        if (!this.readyForNextCall) return this.SetActive(state, funcAfter);
+        
+        this.readyForNextCall = false;
+        
         var animInTime = this.animInTime;
         var animOutTime = this.animOutTime;
         
@@ -57,6 +63,8 @@ class dialogueSys
                 this.diaIsActive = true;
                 
                 funcAfter();
+                
+                this.readyForNextCall = true;
             }, animInTime * 1000);
         }
         else
@@ -70,7 +78,10 @@ class dialogueSys
             setTimeout(() => {
                 this.diaBox.setAttribute("data-disabled", "true");
                 this.diaBox.style.animation = "none";
+                
                 funcAfter();
+                
+                this.readyForNextCall = true;
             }, animOutTime * 1000);
         }
     }
@@ -78,6 +89,10 @@ class dialogueSys
     typeOnBox (text, speed, person, face, funcAfter)
     {
         if (!this.diaIsActive) return;
+        
+        if (!this.readyForNextCall) return this.typeOnBox(text, speed, person, face, funcAfter);
+        
+        this.readyForNextCall = false;
         
         if (funcAfter == null) funcAfter = function () { };
         
@@ -162,22 +177,35 @@ class dialogueSys
             else if (this.charIndex == text.length + charIndexOld)
             {
                 clearInterval(interval);
+                
                 this.notTypingFunc();
                 funcAfter();
+                
+                this.readyForNextCall = true;
             }
         }, (24 / speed));
     }
     
     lineBreakBox (amount)
     {
+        if (!this.readyForNextCall) return lineBreakBox(amount);
+        
+        this.readyForNextCall = false;
+        
         for (let i = 0; i < amount; i++)
         {
             this.textBox.innerHTML += "<br>";
         }
+        
+        this.readyForNextCall = true;
     }
     
     resetBoxTo (text)
     {
+        if (!this.readyForNextCall) return resetBoxTo(text);
+        
+        this.readyForNextCall = false;
+        
         var modifiedText = "";
         
         for (let i = 0; i < text.length; i++)
@@ -188,12 +216,20 @@ class dialogueSys
         this.charIndex = text.length;
         
         this.textBox.innerHTML = modifiedText;
+        
+        this.readyForNextCall = true;
     }
     
     clearBox ()
     {
+        if (!this.readyForNextCall) return clearBox();
+        
+        this.readyForNextCall = false;
+        
         this.SpecialBox = null;
         this.charIndex = 0;
         this.diaBoxLine.innerHTML = "";
+        
+        this.readyForNextCall = true;
     }
 }
