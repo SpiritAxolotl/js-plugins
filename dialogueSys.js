@@ -188,7 +188,7 @@ class dialogueSys
     
     lineBreakBox (amount)
     {
-        if (!this.readyForNextCall) return requestAnimationFrame(() => { lineBreakBox(amount); });
+        if (!this.readyForNextCall) return requestAnimationFrame(() => { this.lineBreakBox(amount); });
         
         this.readyForNextCall = false;
         
@@ -202,7 +202,7 @@ class dialogueSys
     
     resetBoxTo (text)
     {
-        if (!this.readyForNextCall) return requestAnimationFrame(() => { resetBoxTo(text); });
+        if (!this.readyForNextCall) return requestAnimationFrame(() => { this.resetBoxTo(text); });
         
         this.readyForNextCall = false;
         
@@ -222,7 +222,7 @@ class dialogueSys
     
     clearBox ()
     {
-        if (!this.readyForNextCall) return requestAnimationFrame(() => { clearBox(); });
+        if (!this.readyForNextCall) return requestAnimationFrame(() => { this.clearBox(); });
         
         this.readyForNextCall = false;
         
