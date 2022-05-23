@@ -3,7 +3,7 @@
 A JavaScript plugin that adds a div based RPG style dialogue system. Which includes animation, audio, images and function call logic.
 Originally made for SpiritAxolotl's birthday.
 
-Version : 1.3.20f - SpaxDay Modified
+Version : 1.3.21f - SpaxDay Modified
 
 By CalmBubbles :)
 
@@ -103,7 +103,7 @@ class dialogueSys
         
         for (let i = 0; i < text.length; i++)
         {
-            modifiedText += `<span id="dialogueSysChar_${i + this.charIndex}" style="color : ${this.textColor}; background : ${this.textBg}; font-style : ${this.textStyle}; font-weight : ${this.textWeight}; visibility : hidden;">${text[i]}</span>`;
+            modifiedText += `<span id="dialogueSysChar_${i + this.charIndex}" style="display : inline-block; color : ${this.textColor}; background : ${this.textBg}; font-style : ${this.textStyle}; font-weight : ${this.textWeight}; visibility : hidden;">${text[i]}</span>`;
         }
         
         for (let i = 0; i < this.peeps.length; i++)
@@ -217,7 +217,7 @@ class dialogueSys
         
         for (let i = 0; i < text.length; i++)
         {
-            modifiedText += `<span id="dialogueSysChar_${this.charIndex + i}" style="color : ${this.textColor}; background : ${this.textBg};">${text[i]} font-style : ${this.textStyle}; font-weight : ${this.textWeight};</span>`;
+            modifiedText += `<span id="dialogueSysChar_${this.charIndex + i}" style="display : inline-block; color : ${this.textColor}; background : ${this.textBg};">${text[i]} font-style : ${this.textStyle}; font-weight : ${this.textWeight};</span>`;
         }
         
         this.charIndex = text.length;
