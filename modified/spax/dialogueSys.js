@@ -217,7 +217,7 @@ class dialogueSys
         
         for (let i = 0; i < text.length; i++)
         {
-            modifiedText += `<span id="dialogueSysChar_${this.charIndex + i}"color : ${this.textColor}; background : ${this.textBg};">${text[i]} font-style : ${this.textStyle}; font-weight : ${this.textWeight};</span>`;
+            modifiedText += `<span id="dialogueSysChar_${this.charIndex + i}" style="color : ${this.textColor}; background : ${this.textBg};">${text[i]} font-style : ${this.textStyle}; font-weight : ${this.textWeight};</span>`;
         }
         
         this.charIndex = text.length;
