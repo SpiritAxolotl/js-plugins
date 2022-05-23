@@ -3,7 +3,7 @@
 A JavaScript plugin that adds a div based RPG style dialogue system. Which includes animation, audio, images and function call logic.
 Originally made for SpiritAxolotl's birthday.
 
-Version : 1.3.17a
+Version : 1.3.20f
 
 By CalmBubbles :)
 
@@ -25,6 +25,8 @@ class dialogueSys
         this.audioVol = 0.75;
         this.textColor = "inherit";
         this.textBg = "none";
+        this.textStyle = "normal";
+        this.textWeight = "normal";
         
         var newDBL = document.createElement("div");
         this.diaBox.appendChild(newDBL);
@@ -61,10 +63,9 @@ class dialogueSys
                 this.diaBox.style.animation = "none";
                 
                 this.diaIsActive = true;
+                this.readyForNextCall = true;
                 
                 funcAfter();
-                
-                this.readyForNextCall = true;
             }, animInTime * 1000);
         }
         else
@@ -79,9 +80,9 @@ class dialogueSys
                 this.diaBox.setAttribute("data-disabled", "true");
                 this.diaBox.style.animation = "none";
                 
-                funcAfter();
-                
                 this.readyForNextCall = true;
+                
+                funcAfter();
             }, animOutTime * 1000);
         }
     }
@@ -104,7 +105,7 @@ class dialogueSys
         
         for (let i = 0; i < text.length; i++)
         {
-            modifiedText += `<span id="dialogueSysChar_${i + this.charIndex}" style="color : ${this.textColor}; background : ${this.textBg}; visibility : hidden;">${text[i]}</span>`;
+            modifiedText += `<span id="dialogueSysChar_${i + this.charIndex}" style="color : ${this.textColor}; background : ${this.textBg}; font-style : ${this.textStyle}; font-weight : ${this.textWeight}; visibility : hidden;">${text[i]}</span>`;
         }
         
         for (let i = 0; i < this.peeps.length; i++)
@@ -179,9 +180,10 @@ class dialogueSys
                 clearInterval(interval);
                 
                 this.notTypingFunc();
-                funcAfter();
                 
                 this.readyForNextCall = true;
+                
+                funcAfter();
             }
         }, (24 / speed));
     }
@@ -210,7 +212,7 @@ class dialogueSys
         
         for (let i = 0; i < text.length; i++)
         {
-            modifiedText += `<span id="dialogueSysChar_${this.charIndex + i}" style="color : ${this.textColor}; background : ${this.textBg};">${text[i]}</span>`;
+            modifiedText += `<span id="dialogueSysChar_${this.charIndex + i}" style="color : ${this.textColor}; background : ${this.textBg}; font-style : ${this.textStyle}; font-weight : ${this.textWeight};">${text[i]}</span>`;
         }
         
         this.charIndex = text.length;
