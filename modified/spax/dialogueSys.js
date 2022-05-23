@@ -61,10 +61,9 @@ class dialogueSys
                 this.diaBox.style.animation = "none";
                 
                 this.diaIsActive = true;
+                this.readyForNextCall = true;
                 
                 funcAfter();
-                
-                this.readyForNextCall = true;
             }, animInTime * 1000);
         }
         else
@@ -79,9 +78,9 @@ class dialogueSys
                 this.diaBox.setAttribute("data-disabled", "true");
                 this.diaBox.style.animation = "none";
                 
-                funcAfter();
-                
                 this.readyForNextCall = true;
+                
+                funcAfter();
             }, animOutTime * 1000);
         }
     }
@@ -186,9 +185,10 @@ class dialogueSys
                 clearInterval(interval);
                 
                 this.notTypingFunc();
-                funcAfter();
                 
                 this.readyForNextCall = true;
+                
+                funcAfter();
             }
         }, (24 / speed));
     }
