@@ -30,3 +30,5 @@ I cannot be liable for any claim, damages or other liability.
 please read and understand the actual license text)
 
 Please keep this LICENSE like a certificate
+
+People who are going going to use the plugins I made for them(modified and unmodified) don't need to credit me or use this license
