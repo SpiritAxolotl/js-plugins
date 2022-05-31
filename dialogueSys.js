@@ -3,7 +3,7 @@
 A JavaScript plugin that adds a div based RPG style dialogue system. Which includes animation, audio, images and function call logic.
 Originally made for SpiritAxolotl's birthday.
 
-Version : 1.3.20f
+Version : 1.3.21f
 
 By CalmBubbles :)
 
@@ -14,8 +14,8 @@ class dialogueSys
     constructor (dialogueBox, blockedText, characters, animIn, animInTime, animOut, animOutTime, imgSrc, audioSrc)
     {
         this.diaBox = dialogueBox;
-        this.blockedChars = blockedText;
-        this.peeps = characters;
+        this.blockedChars = blockedText ?? [];
+        this.peeps = characters ?? [];
         this.animIn = animIn;
         this.animInTime = animInTime;
         this.animOut = animOut;
