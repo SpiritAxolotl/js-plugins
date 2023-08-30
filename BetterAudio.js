@@ -4,7 +4,7 @@
 Makes the use of web audio a lot easier. Adds more feature to audio.
 Originally made for SpiritAxolotl's birthday.
 
-Version : 0.82a
+Version : 0.83a
 
 By CalmBubbles :)
 
@@ -58,7 +58,7 @@ class BetterAudio
     {
         this.#src = value;
         
-        this.load();
+        this.Load();
     }
     
     get paused ()
